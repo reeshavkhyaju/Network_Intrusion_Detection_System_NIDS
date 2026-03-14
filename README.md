@@ -5,7 +5,7 @@ A machine learning-based Network Intrusion Detection System using **Logistic Reg
 ## 📁 Project Structure
 
 ```
-vibecode/
+code/
 ├── Data_Collector.py           # Captures network traffic with labels (BENIGN / Attack)
 ├── Attack_Generator.py          # Generates attack traffic (portscan, tcp-flood, udp-flood)
 ├── Trainer.py                   # Trains Logistic Regression model
