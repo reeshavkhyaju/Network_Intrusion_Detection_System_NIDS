@@ -1,0 +1,131 @@
+NETWORK INTRUSION DETECTION SYSTEM (NIDS) - PROJECT DESCRIPTION
+=================================================================
+
+This project implements a machine learning based Network Intrusion Detection System using Logistic Regression for binary classification:
+- BENIGN (normal traffic)
+- Attack (malicious traffic)
+
+MAIN WORKFLOW
+-------------
+1) Data Collection
+   - Use Data_Collector.py to capture labeled flow data.
+   - Label options are binary: BENIGN or Attack.
+
+2) Attack Traffic Generation (for testing/data creation)
+   - Use Attack_Generator.py to produce:
+     - Port scan
+     - TCP flood
+     - UDP flood
+   - All generated attack traffic is treated as Attack class.
+
+3) Data Validation
+   - Use Data_Checker.py to inspect:
+     - Label distribution
+     - Missing/infinite values
+     - Feature statistics
+     - Suspicious patterns
+
+4) Model Training
+   - Use Trainer.py to train Logistic Regression model.
+   - Saves artifacts:
+     - ids_model.pkl
+     - ids_scaler.pkl
+     - ids_labels.pkl
+     - ids_features.pkl
+     - ids_metadata.pkl
+     - confusion_matrix.png
+     - feature_importance.png
+
+5) Real-Time Detection
+   - Use Attack_Detector.py to monitor traffic and classify completed flows.
+   - Alerts are logged in intrusion_alerts.log.
+
+KEY SUPPORT FILES
+-----------------
+- Quick_Start.py: interactive menu for end-to-end operation.
+- Complete_Workflow_Example.py: guided step-by-step demo.
+- DATA_COLLECTION_GUIDE.md: data collection instructions.
+- TRAINING_DETECTION_GUIDE.md: training and detection instructions.
+- example_data.csv / example_data_summary.txt: sample dataset and quick stats.
+
+EXAMPLE DATA SNAPSHOT
+---------------------
+- Total samples: 47,028
+- Features: 45 columns
+- Label balance:
+  - BENIGN: 24,721 (52.57%)
+  - Attack: 22,307 (47.43%)
+
+MODEL RESULT HIGHLIGHT (FROM PROVIDED CONFUSION MATRIX)
+--------------------------------------------------------
+- Attack correctly detected: 4450
+- Attack missed as BENIGN: 12
+- BENIGN wrongly flagged as Attack: 4
+- BENIGN correctly classified: 4940
+
+PLATFORM NOTES
+--------------
+- Windows requires Npcap for Scapy packet capture.
+- Run capture/detection scripts with Administrator privileges.
+
+INSTALLATION REQUIREMENTS
+-------------------------
+1) Python
+    - Python 3.7 or higher.
+
+2) Windows packet capture dependency
+    - Install Npcap (with WinPcap compatibility mode):
+       https://npcap.com/#download
+
+3) Python packages to install
+    - Recommended command:
+       pip install scapy pandas numpy scikit-learn joblib matplotlib seaborn
+
+LIBRARIES USED IN THIS PROJECT
+------------------------------
+- Network packet capture/forging: scapy
+- Data handling: pandas, numpy
+- Machine learning: scikit-learn
+   - train_test_split, cross_val_score
+   - StandardScaler, LabelEncoder
+   - LogisticRegression
+   - accuracy/precision/recall/F1, confusion_matrix, roc_auc_score
+- Model persistence: joblib
+- Visualization: matplotlib, seaborn
+- Built-in Python modules: argparse, os, sys, signal, logging, time, datetime, threading, warnings
+
+WHAT IS "sniff"?
+-----------------
+- `sniff` is a function from Scapy (`from scapy.all import sniff`).
+- It captures live network packets from an interface.
+- In this project, `sniff` is used in `Data_Collector.py` and `Attack_Detector.py` to read real-time traffic for feature extraction and attack detection.
+
+EXACT PYTHON + LIBRARIES USED (FROM PROJECT IMPORTS)
+-----------------------------------------------------
+Python:
+- Python 3.7+
+
+External libraries (install with pip):
+- scapy
+- pandas
+- numpy
+- scikit-learn
+- joblib
+- matplotlib
+- seaborn
+
+Python standard library modules used:
+- argparse
+- os
+- sys
+- signal
+- logging
+- time
+- datetime
+- random
+- threading
+- warnings
+
+IMPORTANT SAFETY NOTE
+---------------------
+Use attack-generation features only in authorized environments (systems you own or have explicit permission to test).

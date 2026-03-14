@@ -1,0 +1,10 @@
+DATA QUALITY SUMMARY
+======================================================================
+
+File: example_data.csv
+Total samples: 47,028
+Total features: 45
+
+Label Distribution:
+  BENIGN: 24,721 (52.57%)
+  Attack: 22,307 (47.43%)
